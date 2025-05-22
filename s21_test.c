@@ -837,6 +837,299 @@ END_TEST
 // }
 // END_TEST
 
+// START_TEST(test_s21_sprintf) {
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+// 		int len1 = s21_sprintf(buf1, "%c", 'A');
+// 		int len2 = sprintf(buf2, "%c", 'A');
+// 		ck_assert_int_eq(len1, len2);
+// 		ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+// 		int len1 = s21_sprintf(buf1, "%d",-123456 );
+// 		int len2 = sprintf(buf2, "%d", -123456);
+// 		ck_assert_int_eq(len1, len2);
+// 		ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+// 		int len1 = s21_sprintf(buf1, "%i", 123456);
+// 		int len2 = sprintf(buf2, "%i", 123456);
+// 		ck_assert_int_eq(len1, len2);
+// 		ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+// 		double val = 1234.56789;
+// 		int len1 = s21_sprintf(buf1, "%.6e", val);
+// 		int len2 = sprintf(buf2, "%.6e", val);
+// 		ck_assert_int_eq(len1, len2);
+// 		ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+// 		double val = 1234.56789;
+// 		int len1 = s21_sprintf(buf1, "%.6E", val);
+// 		int len2 = sprintf(buf2, "%.6E", val);
+// 		ck_assert_int_eq(len1, len2);
+// 		ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+// 		double val = 1234.56789;
+// 		int len1 = s21_sprintf(buf1, "%.6f", val);
+// 		int len2 = sprintf(buf2, "%.6f", val);
+// 		ck_assert_int_eq(len1, len2);
+// 		ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+// 		double val = 1234.56789;
+// 		int len1 = s21_sprintf(buf1, "%g", val);
+// 		int len2 = sprintf(buf2, "%g", val);
+// 		ck_assert_int_eq(len1, len2);
+// 		ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+// 		unsigned int val = 0755;
+// 		int len1 = s21_sprintf(buf1, "%o", val);
+// 		int len2 = sprintf(buf2, "%o", val);
+// 		ck_assert_int_eq(len1, len2);
+// 		ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+// 		const char *str = "Я ЩАС МОЗГИ ПОЛОМАЮ СЕБЕ!";
+// 		int len1 = s21_sprintf(buf1, "%s", str);
+// 		int len2 = sprintf(buf2, "%s", str);
+// 		ck_assert_int_eq(len1, len2);
+// 		ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+// 		const char *str = "123456789";
+// 		int len1 = s21_sprintf(buf1, "%u", str);
+// 		int len2 = sprintf(buf2, "%u", str);
+// 		ck_assert_int_eq(len1, len2);
+// 		ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+// 		unsigned int val = 0x1a3f;
+// 		int len1 = s21_sprintf(buf1, "%x", val);
+// 		int len2 = sprintf(buf2, "%x", val);
+// 		ck_assert_int_eq(len1, len2);
+// 		ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+// 		unsigned int val = 0x1a3f;
+// 		int len1 = s21_sprintf(buf1, "%X", val);
+// 		int len2 = sprintf(buf2, "%X", val);
+// 		ck_assert_int_eq(len1, len2);
+// 		ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+// 		void *ptr = buf1;
+// 		int len1 = s21_sprintf(buf1, "%p", ptr);
+// 		int len2 = sprintf(buf2, "%p", ptr);
+// 		ck_assert_int_eq(len1, len2);
+// 		ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+// 		int len1 = s21_sprintf(buf1, "%%");
+// 		int len2 = sprintf(buf2, "%%");
+// 		ck_assert_int_eq(len1, len2);
+// 		ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+// 		int n1 = -1;
+// 		int n2 = -1;
+// 		int len1 = s21_sprintf(buf1, "Hello%nWorld", &n1);
+// 		int len2 = sprintf(buf2, "Hello%nWorld", &n2);
+// 		ck_assert_int_eq(len1, len2);
+// 		ck_assert_str_eq(buf1, buf2);
+// 		ck_assert_int_eq(n1, n2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+//     	int val = 123;
+//     	int len1 = s21_sprintf(buf1, "%-10d", val);
+//     	int len2 = sprintf(buf2, "%-10d", val);
+//     	ck_assert_int_eq(len1, len2);
+//     	ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+//     	int val_pos = 123;
+//     	int val_neg = -123;
+//     	int len1 = s21_sprintf(buf1, "%+d %+d", val_pos, val_neg);
+//     	int len2 = sprintf(buf2, "%+d %+d", val_pos, val_neg);
+//     	ck_assert_int_eq(len1, len2);
+//     	ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100];
+// 		char buf2[100];
+//     	int val_pos = 123;
+//     	int val_neg = -123;
+//     	int len1 = s21_sprintf(buf1, "% d % d", val_pos, val_neg);
+//     	int len2 = sprintf(buf2, "% d % d", val_pos, val_neg);
+//     	ck_assert_int_eq(len1, len2);
+//     	ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100], buf2[100];
+//     	unsigned int val1 = 123;
+//     	unsigned int val2 = 0;
+//     	int len1 = s21_sprintf(buf1, "%#o %#x %#X %#o", val1, val1, val1, val2);
+//     	int len2 = sprintf(buf2, "%#o %#x %#X %#o", val1, val1, val1, val2);
+//     	ck_assert_int_eq(len1, len2);
+//     	ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100], buf2[100];
+//     	double val = 123.0;
+//     	int len1 = s21_sprintf(buf1, "%#.0f %#.0e %#.0g", val, val, val);
+//     	int len2 = sprintf(buf2, "%#.0f %#.0e %#.0g", val, val, val);
+//     	ck_assert_int_eq(len1, len2);
+//     	ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100], buf2[100];
+//     	int val = 123;
+// 		int len1 = s21_sprintf(buf1, "%010d", val);
+//     	int len2 = sprintf(buf2, "%010d", val);
+//     	ck_assert_int_eq(len1, len2);
+//     	ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100], buf2[100];
+//     	int val = 123;
+//     	int len1 = s21_sprintf(buf1, "%-+10d", val);
+//     	int len2 = sprintf(buf2, "%-+10d", val);
+//     	ck_assert_int_eq(len1, len2);
+//     	ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100], buf2[100];
+//     	int val = 123;
+//     	int len1 = s21_sprintf(buf1, "%10d", val);
+//     	int len2 = sprintf(buf2, "%10d", val);
+//     	ck_assert_int_eq(len1, len2);
+//     	ck_assert_str_eq(buf1, buf2);
+
+//     	ck_assert(buf1[7] == ' ');
+// 	}
+// 	{
+// 		char buf1[100], buf2[100];
+//     	int val = 123;
+//     	int width = 10;
+
+//     	int len1 = s21_sprintf(buf1, "%*d", width, val);
+//     	int len2 = sprintf(buf2, "%*d", width, val);
+
+//     	ck_assert_int_eq(len1, len2);
+//     	ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100], buf2[100];
+//     int val = 123;
+//     int len1 = s21_sprintf(buf1, "%.5d", val);
+//     int len2 = sprintf(buf2, "%.5d", val);
+//     ck_assert_int_eq(len1, len2);
+//     ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		 char buf1[100], buf2[100];
+//     int val = 0;
+//     int len1 = s21_sprintf(buf1, "%.0d", val);
+//     int len2 = sprintf(buf2, "%.0d", val);
+//     ck_assert_int_eq(len1, len2);
+//     ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100], buf2[100];
+//     double val = 3.1415926535;
+//     int len1 = s21_sprintf(buf1, "%.2f", val);
+//     int len2 = sprintf(buf2, "%.2f", val);
+//     ck_assert_int_eq(len1, len2);
+//     ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100], buf2[100];
+//     double val = 1234.56789;
+//     int len1 = s21_sprintf(buf1, "%.3e", val);
+//     int len2 = sprintf(buf2, "%.3e", val);
+//     ck_assert_int_eq(len1, len2);
+//     ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100], buf2[100];
+//     double val = 123.456789;
+//     int len1 = s21_sprintf(buf1, "%.3g", val);
+//     int len2 = sprintf(buf2, "%.3g", val);
+//     ck_assert_int_eq(len1, len2);
+//     ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100], buf2[100];
+//     const char *str = "abcdef";
+//     int len1 = s21_sprintf(buf1, "%.3s", str);
+//     int len2 = sprintf(buf2, "%.3s", str);
+//     ck_assert_int_eq(len1, len2);
+//     ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100], buf2[100];
+//     const char *str = "abc";
+//     int len1 = s21_sprintf(buf1, "%.5s", str);
+//     int len2 = sprintf(buf2, "%.5s", str);
+//     ck_assert_int_eq(len1, len2);
+//     ck_assert_str_eq(buf1, buf2); 
+// 	}
+// 	{
+// 		char buf1[100], buf2[100];
+//     double val = 3.1415926535;
+//     int precision = 3;
+//     int len1 = s21_sprintf(buf1, "%.*f", precision, val);
+//     int len2 = sprintf(buf2, "%.*f", precision, val);
+//     ck_assert_int_eq(len1, len2);
+//     ck_assert_str_eq(buf1, buf2);
+// 	}
+// 	{
+// 		char buf1[100], buf2[100];
+//     int val = 42;
+//     int precision = 5;
+//     int len1 = s21_sprintf(buf1, "%.*d", precision, val);
+//     int len2 = sprintf(buf2, "%.*d", precision, val);
+//     ck_assert_int_eq(len1, len2);
+//     ck_assert_str_eq(buf1, buf2);
+// 	}
+// }
+
 Suite *s21_string_suite(void) {
 	Suite *s = suite_create("s21_string");
 	// TCase *tc_memchr = tcase_create("Memchr");
